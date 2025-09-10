@@ -119,12 +119,12 @@ export default function Home() {
             name: "Euro",
             multiplier: MultiplierCoefficientEnum.YirmiDortGramAltinSatis,
             priceSell: (euroSellPrice + MultiplierCoefficientEnum.EuroSatis).toLocaleString('tr-TR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits: 3,
+              maximumFractionDigits: 3
             }),
             priceBuy: (euroBuyPrice - MultiplierCoefficientEnum.EuroAlis).toLocaleString('tr-TR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits: 3,
+              maximumFractionDigits: 3
             }),
             sellDirection: euroData.dir?.satis_dir || "neutral",
             buyDirection: euroData.dir?.alis_dir || "neutral"
@@ -133,12 +133,12 @@ export default function Home() {
             name: "Dolar",
             multiplier: MultiplierCoefficientEnum.YirmiDortGramAltinSatis,
             priceSell: (dolarSellPrice + MultiplierCoefficientEnum.UsdSatis).toLocaleString('tr-TR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits: 3,
+              maximumFractionDigits: 3
             }),
             priceBuy: (dolarBuyPrice - MultiplierCoefficientEnum.UsdAlis).toLocaleString('tr-TR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits: 3,
+              maximumFractionDigits: 3
             }),
             sellDirection: dolarData.dir?.satis_dir || "neutral",
             buyDirection: dolarData.dir?.alis_dir || "neutral"
