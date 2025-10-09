@@ -117,7 +117,7 @@ export default function Home() {
         const goldPrices = [
           {
             name: "Euro",
-            multiplier: MultiplierCoefficientEnum.YirmiDortGramAltinSatis,
+            multiplier: MultiplierCoefficientEnum.EuroSatis,
             priceSell: (euroSellPrice + MultiplierCoefficientEnum.EuroSatis).toLocaleString('tr-TR', {
               minimumFractionDigits: 3,
               maximumFractionDigits: 3
@@ -131,7 +131,7 @@ export default function Home() {
           },
           {
             name: "Dolar",
-            multiplier: MultiplierCoefficientEnum.YirmiDortGramAltinSatis,
+            multiplier: MultiplierCoefficientEnum.UsdSatis,
             priceSell: (dolarSellPrice + MultiplierCoefficientEnum.UsdSatis).toLocaleString('tr-TR', {
               minimumFractionDigits: 3,
               maximumFractionDigits: 3
@@ -145,13 +145,13 @@ export default function Home() {
 
           },
           {
-            name: "24 Ayar Gram Altın",
-            multiplier: MultiplierCoefficientEnum.YirmiDortGramAltinSatis,
-            priceSell: (goldSellPrice * MultiplierCoefficientEnum.YirmiDortGramAltinSatis).toLocaleString('tr-TR', {
+            name: "22 Ayar Gram Altın",
+            multiplier: MultiplierCoefficientEnum.YirmiIkiGramAltinSatis,
+            priceSell: (goldSellPrice * MultiplierCoefficientEnum.YirmiIkiGramAltinSatis).toLocaleString('tr-TR', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             }),
-            priceBuy: (goldBuyPrice * MultiplierCoefficientEnum.YirmiDortGramAltinAlis).toLocaleString('tr-TR', {
+            priceBuy: (goldBuyPrice * MultiplierCoefficientEnum.YirmiIkiGramAltinAlis).toLocaleString('tr-TR', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             }),
@@ -324,7 +324,7 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main className={styles.main}>
+        <main>
           {/* Son güncelleme zamanını göster */}
           {calculatedGoldPrices.length > 0 && (
               <div className={styles.lastUpdate}>

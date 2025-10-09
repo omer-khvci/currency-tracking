@@ -1,5 +1,5 @@
 const MultiplierCoefficientEnum = {
-    YirmiDortGramAltinSatis: 1.006,
+    YirmiIkiGramAltinSatis: 1.006,
     BilezikSatis: 0.954,
     ZiynetCeyrekSatis: 1.64,
     ZiynetYarimSatis: 3.28,
@@ -10,7 +10,7 @@ const MultiplierCoefficientEnum = {
     ResatTamSatis: 6.65,
     IkiBucukResatSatis: 16.65,
     BesliResatSatis: 33.30,
-    YirmiDortGramAltinAlis: 0.997,
+    YirmiIkiGramAltinAlis: 0.997,
     BilezikAlis: 0.910,
     ZiynetCeyrekAlis: 1.60,
     ZiynetYarimAlis: 3.20,
