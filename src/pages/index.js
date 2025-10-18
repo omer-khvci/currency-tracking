@@ -145,13 +145,13 @@ export default function Home() {
 
           },
           {
-            name: "22 Ayar Gram Altın",
-            multiplier: MultiplierCoefficientEnum.YirmiIkiGramAltinSatis,
-            priceSell: (goldSellPrice * MultiplierCoefficientEnum.YirmiIkiGramAltinSatis).toLocaleString('tr-TR', {
+            name: "24 Ayar Gram Altın",
+            multiplier: MultiplierCoefficientEnum.YirmiDortGramAltinSatis,
+            priceSell: (goldSellPrice * MultiplierCoefficientEnum.YirmiDortGramAltinSatis).toLocaleString('tr-TR', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             }),
-            priceBuy: (goldBuyPrice * MultiplierCoefficientEnum.YirmiIkiGramAltinAlis).toLocaleString('tr-TR', {
+            priceBuy: (goldBuyPrice * MultiplierCoefficientEnum.YirmiDortGramAltinAlis).toLocaleString('tr-TR', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             }),
