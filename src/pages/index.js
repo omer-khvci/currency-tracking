@@ -30,53 +30,73 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Socket bağlantısını oluşturma
-    socketRef.current = io("https://socketweb.haremaltin.com", {
-      path: "/socket.io",
-      transports: ["websocket"],
-      reconnection: true,
-      reconnectionAttempts: Infinity,
-      reconnectionDelay: 1000,
-      timeout: 10000,
-    });
+    // // Socket bağlantısını oluşturma
+    // socketRef.current = io("https://socketweb.haremaltin.com", {
+    //   path: "/socket.io",
+    //   transports: ["websocket"],
+    //   reconnection: true,
+    //   reconnectionAttempts: Infinity,
+    //   reconnectionDelay: 1000,
+    //   timeout: 10000,
+    // });
 
-    // Bağlantı başarılı olduğunda
-    socketRef.current.on("connect", () => {
-    });
+    // // Bağlantı başarılı olduğunda
+    // socketRef.current.on("connect", () => {
+    // });
 
-    // price_changed olayını dinle
-    socketRef.current.on("price_changed", (data) => {
-      // Her zaman en son veriyi saklayalım
-      latestDataRef.current = data;
+    // // price_changed olayını dinle
+    // socketRef.current.on("price_changed", (data) => {
+    //   // Her zaman en son veriyi saklayalım
+    //   latestDataRef.current = data;
 
-      // Şimdi kontrol edelim - 15 saniye geçmiş mi?
-      const currentTime = Date.now();
-      if (currentTime - lastUpdateTimeRef.current >= 5000) {
+    //   // Şimdi kontrol edelim - 15 saniye geçmiş mi?
+    //   const currentTime = Date.now();
+    //   if (currentTime - lastUpdateTimeRef.current >= 5000) {
+    //     processData(data);
+    //     lastUpdateTimeRef.current = currentTime;
+    //   }
+    // });
+
+    // // 15 saniyede bir zorla güncelleme için zamanlayıcı
+    // const intervalId = setInterval(() => {
+    //   if (latestDataRef.current) {
+    //     processData(latestDataRef.current);
+    //     lastUpdateTimeRef.current = Date.now();
+    //   }
+    // }, 5000);
+
+    // // Bağlantı hatası
+    // socketRef.current.on("connect_error", (err) => {
+    //   console.error("Socket bağlantı hatası:", err.message);
+    // });
+
+    // // Temizlik fonksiyonu
+    // return () => {
+    //   clearInterval(intervalId);
+    //   if (socketRef.current) {
+    //     socketRef.current.disconnect();
+    //   }
+    // };
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://canlipiyasalar.haremaltin.com/tmp/altin.json?dil_kodu=tr');
+        const data = await response.json();
+        
+        // Mevcut veri işleme mantığını kullan
         processData(data);
-        lastUpdateTimeRef.current = currentTime;
-      }
-    });
-
-    // 15 saniyede bir zorla güncelleme için zamanlayıcı
-    const intervalId = setInterval(() => {
-      if (latestDataRef.current) {
-        processData(latestDataRef.current);
         lastUpdateTimeRef.current = Date.now();
-      }
-    }, 5000);
-
-    // Bağlantı hatası
-    socketRef.current.on("connect_error", (err) => {
-      console.error("Socket bağlantı hatası:", err.message);
-    });
-
-    // Temizlik fonksiyonu
-    return () => {
-      clearInterval(intervalId);
-      if (socketRef.current) {
-        socketRef.current.disconnect();
+      } catch (error) {
+        console.error("Veri çekme hatası:", error);
       }
     };
+
+    // İlk veri çekme
+    fetchData();
+
+    // 5 saniyede bir güncelleme için interval
+    const intervalId = setInterval(fetchData, 5000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   // Gelen veriyi işleme fonksiyonu
