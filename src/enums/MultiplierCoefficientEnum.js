@@ -6,7 +6,7 @@ const MultiplierCoefficientEnum = {
     ZiynetTamSatis: 6.56,
     AtaCeyrekSatis: 1.70,
     AtaYarimSatis: 3.40,
-    AtaTamSatis: 6.70,
+    AtaTamSatis: 6.72,
     ResatTamSatis: 6.65,
     IkiBucukResatSatis: 16.65,
     BesliResatSatis: 33.30,
