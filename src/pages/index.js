@@ -40,7 +40,7 @@ export default function Home() {
       timeout: 10000,
     });
 
-    // Bağlantı başarılı olduğunda
+    // // Bağlantı başarılı olduğunda
     socketRef.current.on("connect", () => {
     });
 
@@ -77,6 +77,7 @@ export default function Home() {
         socketRef.current.disconnect();
       }
     };
+
     // const fetchData = async () => {
     //   try {
     //     const response = await fetch('https://canlipiyasalar.haremaltin.com/tmp/altin.json?dil_kodu=tr');
