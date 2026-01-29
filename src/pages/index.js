@@ -30,18 +30,20 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // // Socket bağlantısını oluşturma
-    socketRef.current = io("https://hrmsocketonly.haremaltin.com", {
+    // Socket bağlantısını oluşturma
+    socketRef.current = io("wss://socket.haremaltin.com", {
       path: "/socket.io",
-      transports: ["websocket"],
+      transports: ["websocket", "polling"],
       reconnection: true,
-      reconnectionAttempts: Infinity,
+      reconnectionAttempts: 10,
       reconnectionDelay: 1000,
-      timeout: 10000,
+      reconnectionDelayMax: 5000,
+      timeout: 20000,
     });
 
-    // // Bağlantı başarılı olduğunda
+    // Bağlantı başarılı olduğunda
     socketRef.current.on("connect", () => {
+      console.log("Socket bağlantısı başarılı");
     });
 
     // price_changed olayını dinle
@@ -49,7 +51,7 @@ export default function Home() {
       // Her zaman en son veriyi saklayalım
       latestDataRef.current = data;
 
-      // Şimdi kontrol edelim - 15 saniye geçmiş mi?
+      // Şimdi kontrol edelim - 5 saniye geçmiş mi?
       const currentTime = Date.now();
       if (currentTime - lastUpdateTimeRef.current >= 5000) {
         processData(data);
@@ -57,7 +59,7 @@ export default function Home() {
       }
     });
 
-    // 15 saniyede bir zorla güncelleme için zamanlayıcı
+    // 5 saniyede bir zorla güncelleme için zamanlayıcı
     const intervalId = setInterval(() => {
       if (latestDataRef.current) {
         processData(latestDataRef.current);
@@ -68,6 +70,14 @@ export default function Home() {
     // Bağlantı hatası
     socketRef.current.on("connect_error", (err) => {
       console.error("Socket bağlantı hatası:", err.message);
+    });
+
+    socketRef.current.on("disconnect", (reason) => {
+      console.log("Socket bağlantısı kesildi:", reason);
+    });
+
+    socketRef.current.on("error", (error) => {
+      console.error("Socket hatası:", error);
     });
 
     // Temizlik fonksiyonu
